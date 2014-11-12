@@ -2,6 +2,7 @@
 require "logstash/codecs/base"
 require "logstash/codecs/plain"
 require "logstash/json"
+require "zlib"
 
 # This codec will read gzip encoded content
 class LogStash::Codecs::GzipLines < LogStash::Codecs::Base
