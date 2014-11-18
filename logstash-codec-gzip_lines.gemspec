@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
 
   s.name            = 'logstash-codec-gzip_lines'
-  s.version         = '0.1.0'
+  s.version         = '0.1.1'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = 'This codec may be used to decode (via inputs) gzip encoded file'
-  s.description     = 'This codec may be used to decode (via inputs) gzip encoded file'
+  s.description     = "This gem is a logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/plugin install gemname. This gem is not a stand-alone program"
   s.authors         = ["Elasticsearch"]
   s.email           = 'richard.pijnenburg@elasticsearch.com'
-  s.homepage        = 'http://logstash.net/'
+  s.homepage        = "http://www.elasticsearch.org/guide/en/logstash/current/index.html"
   s.require_paths = ['lib']
 
   # Files
@@ -22,5 +22,6 @@ Gem::Specification.new do |s|
   # Gem dependencies
   s.add_runtime_dependency 'logstash', '>= 1.4.0', '< 2.0.0'
 
+  s.add_development_dependency 'logstash-devutils'
 end
 
