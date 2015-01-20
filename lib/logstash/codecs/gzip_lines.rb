@@ -8,7 +8,6 @@ require "zlib"
 class LogStash::Codecs::GzipLines < LogStash::Codecs::Base
   config_name "gzip_lines"
 
-  milestone 3
 
   # The character encoding used in this codec. Examples include "UTF-8" and
   # "CP1252"
