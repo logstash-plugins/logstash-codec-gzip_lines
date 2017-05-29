@@ -29,9 +29,8 @@ class LogStash::Codecs::GzipLines < LogStash::Codecs::Base
 
   public
   def decode(data)
-    @decoder = Zlib::GzipReader.new(data)
-
     begin
+      @decoder = Zlib::GzipReader.new(data)
       @decoder.each_line do |line|
         yield LogStash::Event.new("message" => @converter.convert(line))
       end
