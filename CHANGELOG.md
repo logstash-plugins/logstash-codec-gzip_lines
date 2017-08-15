@@ -1,3 +1,6 @@
+## 3.0.2
+  - Fix some documentation issues
+
 # 3.0.0
   - breaking: update to use new plugin api
 # 2.0.4
