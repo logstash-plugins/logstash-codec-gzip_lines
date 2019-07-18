@@ -3,6 +3,7 @@ require "logstash/codecs/base"
 require "logstash/codecs/plain"
 require "logstash/json"
 require "zlib"
+require "stringio"
 
 # This codec will read gzip encoded content
 class LogStash::Codecs::GzipLines < LogStash::Codecs::Base
@@ -29,6 +30,8 @@ class LogStash::Codecs::GzipLines < LogStash::Codecs::Base
 
   public
   def decode(data)
+    data = StringIO.new(data) if data.kind_of?(String)
+
     @decoder = Zlib::GzipReader.new(data)
 
     begin

@@ -26,18 +26,42 @@ describe LogStash::Codecs::GzipLines do
     str << "2010-03-12   23:51:21   SEA4   192.0.2.222   play   3914   OK   bfd8a98bee0840d9b871b7f6ade9908f   rtmp://shqshne4jdp4b6.cloudfront.net/cfx/st​  key=value   http://player.longtailvideo.com/player.swf   http://www.longtailvideo.com/support/jw-player-setup-wizard?example=204   LNX%2010,0,32,18   myvideo   p=2&q=4   flv   1\n"
 
     str.rewind
+
     str
   end
 
   describe "#decode" do
-    it "should create events from a gzip file" do
-      events = []
+    let(:compressed_log) { compress_with_gzip(uncompressed_log) }
 
-      subject.decode(compress_with_gzip(uncompressed_log)) do |event|
-        events << event
+    # Legacy tests and implementation _required_ an `IO`-like object to be
+    # provided to `LogStash::Codecs::GzipLines#decode`, despite the Logstash
+    # API specifying that a `String` is provided. Continue supporting this
+    # to avoid breaking implementations that provide an IO.
+    context 'when given a StringIO' do
+      it "creates one event per line" do
+        events = []
+
+        subject.decode(compressed_log) do |event|
+          events << event
+        end
+
+        expect(events.size).to eq(2)
       end
+    end
 
-      expect(events.size).to eq(2)
+    context 'when given a String' do
+
+      let(:compressed_log) { super().string }
+
+      it "creates one event per line" do
+        events = []
+
+        subject.decode(compressed_log) do |event|
+          events << event
+        end
+
+        expect(events.size).to eq(2)
+      end
     end
   end
 end
