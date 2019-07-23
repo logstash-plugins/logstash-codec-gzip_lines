@@ -1,3 +1,6 @@
+## 3.0.4
+ - Fixes issue where decode operation did not support string arguments [#3](https://github.com/logstash-plugins/logstash-codec-gzip_lines/issues/3)
+
 ## 3.0.3
   - Update gemspec summary
 
